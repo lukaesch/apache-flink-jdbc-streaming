@@ -14,19 +14,19 @@ import java.util.Properties;
 public class TrackingEventConsumer {
 
     private static final String TOPIC = "tracking";
-    private static final String KAFKA_BOOTSTRAP = "192.168.1.4:9092";
+    private static final String KAFKA_BOOTSTRAP = "localhost:9092";
     private static final int JDBC_BATCH_SIZE = 200;
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DB = "stream";
     private static final String JDBC_TABLE = "tracking";
-    private static final String JDBC_HOST = "localhost";
+    private static final String JDBC_HOST = "localhost:3306";
 
     public static void main(String[] args) throws Exception {
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env
-                .addSource(new FlinkKafkaConsumer010<byte[]>("tracking", new ByteSerialisationSchema(), createKafkaProperties()))
+                .addSource(new FlinkKafkaConsumer010<byte[]>(TOPIC, new ByteSerialisationSchema(), createKafkaProperties()))
                 .setParallelism(10)
                 .map((bytes) -> Protos.TrackingEvent.parseFrom(bytes))
                 .map(TrackingEventConsumer::createOutputFormat)

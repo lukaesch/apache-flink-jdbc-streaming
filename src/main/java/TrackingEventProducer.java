@@ -26,7 +26,7 @@ public class TrackingEventProducer {
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         Properties properties = new Properties();
-        properties.setProperty("bootstrap.servers", "192.168.1.4:9092");
+        properties.setProperty("bootstrap.servers", "localhost:9092");
         env
                 .addSource(new TrackingEventSource(NUMBER_MESSAGES))
                 .map(trackingEvent -> trackingEvent.toByteArray())
