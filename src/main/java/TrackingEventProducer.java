@@ -8,7 +8,7 @@ import java.util.Properties;
  */
 public class TrackingEventProducer {
 
-    private static final int NUMBER_MESSAGES = 10_000;
+    private static final int NUMBER_MESSAGES = 10000;
     private static final String TOPIC = "tracking";
 
     static class TrackingEvent {

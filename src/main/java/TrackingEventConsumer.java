@@ -15,7 +15,7 @@ public class TrackingEventConsumer {
 
     private static final String TOPIC = "tracking";
     private static final String KAFKA_BOOTSTRAP = "localhost:9092";
-    private static final int JDBC_BATCH_SIZE = 200;
+    private static final int JDBC_BATCH_SIZE = 1;
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASSWORD = "root";
     private static final String JDBC_DB = "stream";
@@ -25,14 +25,14 @@ public class TrackingEventConsumer {
     public static void main(String[] args) throws Exception {
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.enableCheckpointing(100);
         env
                 .addSource(new FlinkKafkaConsumer010<byte[]>(TOPIC, new ByteSerialisationSchema(), createKafkaProperties()))
-                .setParallelism(10)
+                .setParallelism(1)
                 .map((bytes) -> Protos.TrackingEvent.parseFrom(bytes))
                 .map(TrackingEventConsumer::createOutputFormat)
                 .map(new MetricsMapper<>())
-                .writeUsingOutputFormat(createJDBCSink())
-                .setParallelism(10);
+                .writeUsingOutputFormat(createJDBCSink());
         env.execute();
     }
 

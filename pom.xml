@@ -13,7 +13,7 @@
         <flink.version>1.2.0</flink.version>
         <protobuf.version>3.0.0</protobuf.version>
         <kafka.version>0.10.0.0</kafka.version>
-        <scala.version>2.10.0</scala.version>
+        <scala.version>2.11.4</scala.version>
         <junit.version>4.12</junit.version>
         <os-maven-plugin.version>1.4.1.Final</os-maven-plugin.version>
         <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
@@ -57,12 +57,12 @@
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-java_2.10</artifactId>
+            <artifactId>flink-streaming-java_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-clients_2.10</artifactId>
+            <artifactId>flink-clients_2.11</artifactId>
             <version>${flink.version}</version>
         </dependency>
 

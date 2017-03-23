@@ -11,7 +11,7 @@ Contains a test class that starts a local kafka broker.
    |
    |   
 [[Source (Kafka) -> Map(Protobuf, Row) -> Sink(JDBC)]]  
-```
+``` 
 
 # Requirements
 You need a running database. I used a mysql docker image:
