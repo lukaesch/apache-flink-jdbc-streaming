@@ -57,7 +57,7 @@ by name. After exiting the CLI client the corresponding container will be remove
 # Quick Start
 
 1. Run MySQL server as described above
-2. Run KafkaProducerIT test in order to start a local Kafka broker
+2. Run KafkaTopicTest test in order to start an embedded Kafka broker
 3. Run TrackingEventProducer main class that publishes events to a kafka topic
 4. Run TrackingEventConsumer main class that consumes events from topic and writes them to the configured database (this is the actual application)
 
