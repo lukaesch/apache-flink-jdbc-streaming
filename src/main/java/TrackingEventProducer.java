@@ -11,16 +11,6 @@ public class TrackingEventProducer {
     private static final int NUMBER_MESSAGES = 10000;
     private static final String TOPIC = "tracking";
 
-    static class TrackingEvent {
-        String message;
-        long id;
-
-        public TrackingEvent(long id, String message) {
-            this.id = id;
-            this.message = message;
-        }
-    }
-
     public static void main(String[] args) throws Exception {
 
 

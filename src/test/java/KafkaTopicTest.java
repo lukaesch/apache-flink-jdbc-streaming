@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
  * http://kafka.apache.org/0100/javadoc/org/apache/kafka/clients/consumer/ConsumerRecord.html
  * http://kafka.apache.org/0100/javadoc/org/apache/kafka/clients/producer/ProducerRecord.html
  */
-public class KafkaProducerIT {
+public class KafkaTopicTest {
 
     private static final String ZKHOST = "127.0.0.1";
     private static final String BROKERHOST = "127.0.0.1";
@@ -72,8 +72,6 @@ public class KafkaProducerIT {
         producerProps.setProperty("value.serializer", "org.apache.kafka.common.serialization.ByteArraySerializer");
         KafkaProducer<Integer, byte[]> producer = new KafkaProducer<Integer, byte[]>(producerProps);
 
-        System.in.read();
-
         // setup consumer
         Properties consumerProps = new Properties();
         consumerProps.setProperty("bootstrap.servers", BROKERHOST + ":" + BROKERPORT);
@@ -98,6 +96,9 @@ public class KafkaProducerIT {
         System.out.printf("offset = %d, key = %s, value = %s", record.offset(), record.key(), record.value());
         assertEquals(42, (int) record.key());
         assertEquals("test-message", new String(record.value(), StandardCharsets.UTF_8));
+
+        // Prevent the Kafka broker from shutting down
+        System.in.read();
 
         kafkaServer.shutdown();
         zkClient.close();
