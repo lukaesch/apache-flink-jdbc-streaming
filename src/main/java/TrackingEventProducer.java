@@ -29,8 +29,7 @@ public class TrackingEventProducer {
         properties.setProperty("bootstrap.servers", "localhost:9092");
         env
                 .addSource(new TrackingEventSource(NUMBER_MESSAGES))
-                .map(trackingEvent -> trackingEvent.toByteArray())
-                .addSink(new FlinkKafkaProducer010<byte[]>(TOPIC, new ByteSerialisationSchema(), properties));
+                .addSink(new FlinkKafkaProducer010<>(TOPIC, new TrackingEventSerde(), properties));
         env.execute();
     }
 }

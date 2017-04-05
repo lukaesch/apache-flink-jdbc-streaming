@@ -27,9 +27,8 @@ public class TrackingEventConsumer {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.enableCheckpointing(100);
         env
-                .addSource(new FlinkKafkaConsumer010<byte[]>(TOPIC, new ByteSerialisationSchema(), createKafkaProperties()))
+                .addSource(new FlinkKafkaConsumer010<>(TOPIC, new TrackingEventSerde(), createKafkaProperties()))
                 .setParallelism(1)
-                .map((bytes) -> Protos.TrackingEvent.parseFrom(bytes))
                 .map(TrackingEventConsumer::createOutputFormat)
                 .map(new MetricsMapper<>())
                 .writeUsingOutputFormat(createJDBCSink());
